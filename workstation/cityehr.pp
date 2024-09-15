@@ -4,6 +4,7 @@
 
 $cityehr_version = '1.8.0-SNAPSHOT'
 $cityehr_war_path = '/opt/tomcat/webapps/cityehr.war'
+$cityehr_quickstart = '2024-08-05_cityEHR_QuickStart.pdf'
 
 $firefox_profile_id = 'ki59z67a'
 
@@ -17,6 +18,19 @@ exec { 'download-cityehr':
     Package['file'],
     Package['curl'],
     Service['tomcat']
+  ],
+}
+
+exec { 'download-cityehr-quickstart-guide':
+  command => "curl -L https://static.evolvedbinary.com/cityehr/${cityehr_quickstart} -o /home/${default_user}/Desktop/cityEHR_QuickStart.pdf",
+  path    => '/usr/bin',
+  user    => $default_user,
+  group   => $default_user,
+  creates => "/home/${default_user}/Desktop/cityEHR_QuickStart.pdf",
+  require => [
+    Package['file'],
+    Package['curl'],
+    File['default_user_desktop_folder'],
   ],
 }
 
