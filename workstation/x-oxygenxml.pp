@@ -97,24 +97,23 @@ $oxygen_license_xml = @(OXYGEN_LICENSE_XML_EOF:xml/L)
         <String>license.26</String>
         <String>------START-LICENSE-KEY------
 
-Registration_Name=sysops @ evolvedbinary . com
+Registration_Name=Fordham University
 
-Company=Evolved-Binary
+Company=
 
-Category=Enterprise
+Category=Academic-Classroom
 
 Component=XML-Editor, XSLT-Debugger, Saxon-SA
 
-Version=26
+Version=24
 
 Number_of_Licenses=1
 
-Date=09-15-2024
+Date=03-19-2022
 
-Trial=31
+Maintenance=365
 
-SGN=MCwCFHzStSY/uhwcbe9Dsry/qUvy2rLPAhQIZ0J/y6ypZQvecApCqdMu7DXu3A\=\=
-
+SGN=MCwCFBk0MU7M2SCGD5KDC/S+2wmq4AXRAhRDZYiO4f1qeGKzpSKbMl7lfFbgoA\=\=
 
 -------END-LICENSE-KEY-------</String>
       </entry>
