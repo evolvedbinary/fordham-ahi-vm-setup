@@ -259,6 +259,91 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
+          <connection name="fordham-ahi-11">
+              <protocol>rdp</protocol>
+              <param name="hostname">fordham-ahi-11.evolvedbinary.com</param>
+              <param name="port">3389</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
+              <param name="enable-touch">false</param>
+              <param name="resize-method">display-update</param>
+              <param name="disable-audio">true</param>
+              <param name="enable-printing">true</param>
+              <param name="printer-name">guacamole-client</param>
+              <param name="enable-drive">true</param>
+              <param name="drive-name">guacamole</param>
+              <param name="drive-path">/guacamole-drive</param>
+          </connection>
+      </authorize>
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
+          <connection name="fordham-ahi-12">
+              <protocol>rdp</protocol>
+              <param name="hostname">fordham-ahi-12.evolvedbinary.com</param>
+              <param name="port">3389</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
+              <param name="enable-touch">false</param>
+              <param name="resize-method">display-update</param>
+              <param name="disable-audio">true</param>
+              <param name="enable-printing">true</param>
+              <param name="printer-name">guacamole-client</param>
+              <param name="enable-drive">true</param>
+              <param name="drive-name">guacamole</param>
+              <param name="drive-path">/guacamole-drive</param>
+          </connection>
+      </authorize>
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
+          <connection name="fordham-ahi-13">
+              <protocol>rdp</protocol>
+              <param name="hostname">fordham-ahi-13.evolvedbinary.com</param>
+              <param name="port">3389</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
+              <param name="enable-touch">false</param>
+              <param name="resize-method">display-update</param>
+              <param name="disable-audio">true</param>
+              <param name="enable-printing">true</param>
+              <param name="printer-name">guacamole-client</param>
+              <param name="enable-drive">true</param>
+              <param name="drive-name">guacamole</param>
+              <param name="drive-path">/guacamole-drive</param>
+          </connection>
+      </authorize>
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
+          <connection name="fordham-ahi-14">
+              <protocol>rdp</protocol>
+              <param name="hostname">fordham-ahi-14.evolvedbinary.com</param>
+              <param name="port">3389</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
+              <param name="enable-touch">false</param>
+              <param name="resize-method">display-update</param>
+              <param name="disable-audio">true</param>
+              <param name="enable-printing">true</param>
+              <param name="printer-name">guacamole-client</param>
+              <param name="enable-drive">true</param>
+              <param name="drive-name">guacamole</param>
+              <param name="drive-path">/guacamole-drive</param>
+          </connection>
+      </authorize>
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
+          <connection name="fordham-ahi-15">
+              <protocol>rdp</protocol>
+              <param name="hostname">fordham-ahi-15.evolvedbinary.com</param>
+              <param name="port">3389</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
+              <param name="enable-touch">false</param>
+              <param name="resize-method">display-update</param>
+              <param name="disable-audio">true</param>
+              <param name="enable-printing">true</param>
+              <param name="printer-name">guacamole-client</param>
+              <param name="enable-drive">true</param>
+              <param name="drive-name">guacamole</param>
+              <param name="drive-path">/guacamole-drive</param>
+          </connection>
+      </authorize>
   </user-mapping>
   | USER_MAPPING_EOF
 
