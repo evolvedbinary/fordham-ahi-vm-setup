@@ -126,6 +126,11 @@ The following software will be configured:
 	* Apache Tomcat 9
 	* Quercus
 
+* Python Development Environment
+	* Python 3
+	* pip3
+	* miniconda 3
+
 * Database Environment
 	* MariaDB Server and Client
 	* MySQL Workbench
