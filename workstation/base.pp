@@ -98,11 +98,11 @@ file { 'default_user_code_folder':
   ],
 }
 
-ssh_authorized_key { 'cityehrwork':
+ssh_authorized_key { 'ahi':
   ensure  => present,
   user    => $default_user,
   type    => 'ssh-ed25519',
-  key     => 'AAAAC3NzaC1lZDI1NTE5AAAAIEwexg8HSsaumrYw5Kd2qGZSbjCbgqJR5wo8rEj+gPfC',
+  key     => 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWpiT3R5AgDYDAm5GhPpvf8+vh3VrI9LcPdav+HsoYc Applied Health Informatics',
   require => User['default_user'],
 }
 

@@ -1,15 +1,15 @@
-# cityEHR Workshop - Virtual Machine
+# Fordham University - AHI (Applied Health Informatics) - Virtual Machine
 
 The following instructions will enable you to setup two things:
 
 1. An [Apache Guacamole](https://guacamole.apache.org/) server that will provide a website for accessing remote machines through a Web Browser.
 
-2. One or More Virtual Machines configured with all of the software required for the purpose of teaching a cityEHR workshop.
+2. One or More Virtual Machines configured with all of the software required for the purpose of teaching the AHI MSc.
 
 ## Obtaining Servers
 
 This can be setup either in [AWS EC2](https://aws.amazon.com/ec2/), or another Virtual Environment such as KVM running on a Linux Server.
-The environment (which provided 1x Guacamole Server, and 9x cityEHR Virtual Machines) and that was used for the workshops delivered in Ukraine (August 2024) and XML Summer School (September 2024) was Ubuntu 24.04 running on a bare-metal server leased by Evolved Binary from [Hetzner](https://www.hetzner.com/) in Germany, with the following configuration:
+The environment (which provided 1x Guacamole Server, and 15x AHI Virtual Machines) and that was used for the 2024 Cohort of the AHI MSc at Fordham University was Ubuntu 24.04 running on a bare-metal server leased via [Evolved Binary](https://www.evolvedbinary.com) from [Hetzner](https://www.hetzner.com/) in Germany, with the following configuration:
 * Xeon E5-1650 v3 @ 3.50GHz (6 Cores / 12 Threads)
 * 128 GB RAM
 * 2x 480GB SSD in RAID 1
@@ -26,36 +26,36 @@ cd ~/hetzner
 
 sudo uvt-simplestreams-libvirt sync --source=http://cloud-images.ubuntu.com/minimal/releases arch=amd64 release=noble
 
-./create-uvt-kvm.sh --hostname cityehrwork1 --release noble --memory 14336 --disk 30 --cpu 4 --bridge virbr1 --ip 5.9.214.101 --ip6 2a01:4f8:212:be9::101 --gateway 136.243.43.238 --gateway6 2a01:4f8:212:be9::2 --dns 213.133.100.100 --dns 213.133.99.99 --dns 213.133.98.98 --dns-search evolvedbinary.com --autostart
+./create-uvt-kvm.sh --hostname fordham-ahi-01 --release noble --memory 8192 --disk 30 --cpu 4 --bridge virbr0 --ip 192.168.122.201 --ip6 2a01:4f8:140:91f0::201 --gateway 192.168.122.1 --gateway6 2a01:4f8:140:91f0::2 --dns 185.12.64.1 --dns 185.12.64.2 --dns-search evolvedbinary.com --private-bridge virbr2 --private-ip 10.0.55.201 --private-gateway 10.0.55.254 --autostart
 ```
 
 **NOTE**: The VM specific settings are:
-* `--hostname` `cityehrwork1`
-* `--ip` `5.9.214.101`
-* `--ip6` `2a01:4f8:212:be9::101`
+* `--hostname` `fordham-ahi-01`
+* `--ip` `192.168.122.201` (IANA Private)
+* `--ip6` `2a01:4f8:140:91f0::201`
 
 **NOTE**: The network settings specific to the host are:
-* `--bridge` `virbr1`
-* `--gateway` `136.243.43.238`
-* `--gateway6` `2a01:4f8:212:be9::2`
+* `--bridge` `virbr0`
+* `--gateway` `192.168.122.1` (IANA Private)
+* `--gateway6` `2a01:4f8:140:91f0::2`
 
 **NOTE**: The network settings specific to the hosting provider are:
-* `--dns 213.133.100.100`, `--dns 213.133.99.99`, `--dns 213.133.98.98`
+* `--dns 185.12.64.1`, `--dns 185.12.64.2`
 
 
 ### 2. Setting up a new AWS EC2 Instance (optional)
 
 If you wish to set this up in AWS EC2, then for each Virtual Machine you need should setup a new EC2 instance with the following properties:
 
-1. Name the instance 'cityehrwork1'. (change the `1` as needed for more machines).
+1. Name the instance 'fordham-ahi-01'. (change the `01` as needed for more machines).
 
 2. Select the `Ubuntu Server 24.04 LTS (HVM), SSD Volume Type` AMI image, and the Architecture `amd64`.
 
-3. Select `m6g.xlarge` instance type. (i.e.: 4vCPU, 16GB Memory, 1x237 NVMe SSD, $0.1776 / hour).
+3. Select `m6a.large` instance type. (i.e.: 2vCPU, 8GB Memory, 1x237 NVMe SSD, $0.0999 / hour).
 
-4. Select the `cityehrwork` keypair.
+4. Select the `fordham-ahi` keypair.
 
-5. Select the `cityehrwork vm` Security Group.
+5. Select the `fordham-ahi vm` Security Group.
 
 6. Set the default Root Volume as an `EBS` `30 GiB` volume on `GP3` at `3000 IOPS` and `125 MiB throughput`.
 
@@ -64,11 +64,11 @@ If you wish to set this up in AWS EC2, then for each Virtual Machine you need sh
 
 Apache Guacamole provides a web interface for accessing any virtual machine remotely. This is used so that students only need a web-browser. The student accesses Guacamole, and then Guacamole connects them to the remote virtual machine.
 
-Guacamole should be run in its own virtual machine. To install Guacamole and configure it for cityEHR run the following commands on a new VM:
+Guacamole should be run in its own virtual machine. To install Guacamole and configure it for AHI run the following commands on a new VM:
 
 ```shell
-git clone https://github.com/evolvedbinary/cityehr-workshop-vm-setup.git
-cd cityehr-workshop-vm-setup
+git clone https://github.com/evolvedbinary/fordham-ahi-vm-setup.git
+cd fordham-ahi-vm-setup
 sudo ./install-puppet-agent.sh
 
 cd guacamole
@@ -85,29 +85,29 @@ We have to restart the system after the above as it may install a new Kernel and
 sudo shutdown -r now
 ```
 
-After the system restarts and you have logged in, you need to resume from the `cityehr-workshop-vm-setup/guacamole` repo checkout:
+After the system restarts and you have logged in, you need to resume from the `fordham-ahi-vm-setup/guacamole` repo checkout:
 
 ```shell
-cd cityehr-workshop-vm-setup/guacamole
+cd fordham-ahi-vm-setup/guacamole
 
 sudo FACTER_default_user_password=mypassword2 \
-     FACTER_cityehrwork_default_user_password=mypassword
+     FACTER_ahi_default_user_password=mypassword
      /opt/puppetlabs/bin/puppet apply .
 ```
 
 **NOTE:** you should set your own passwords appropriately above!
 
 * `default_user_password` this is the password to set for the default linux user on this machine (typically the user is named `ubuntu` on Ubuntu Cloud images).
-* `cityehrwork_default_user_password` should be set to the password of the default user on the remote (cityEHR workstation) virtual machines that you are trying to access.
+* `ahi_default_user_password` should be set to the password of the default user on the remote (AHI workstation) virtual machines that you are trying to access.
 
 After installation Guacamole's Web Server should be accessible from: [http://localhost:8080](http://localhost:8080), but should be accessible (via an nginx reverse proxy) from: [https://localhost](https://localhost)
 
 
-## Installing a cityEHR Workstation
+## Installing an AHI Workstation
 
-You can install one or more cityEHR workstations, each should be configured within its own virtual (or physical) machine. We expect to start from a clean Ubuntu Server, or Ubuntu Cloud Image install. This has been tested with Ubuntu version 24.04 LTS (x86_64).
+You can install one or more AHI workstations, each should be configured within its own virtual (or physical) machine. We expect to start from a clean Ubuntu Server, or Ubuntu Cloud Image install. This has been tested with Ubuntu version 24.04 LTS (x86_64).
 
-### cityEHR Software Environment
+### AHI Software Environment
 
 The following software will be configured:
 
@@ -156,13 +156,13 @@ The following software will be configured:
 	* tar, gzip, bzip2, zstd, zip (and unzip)
 
 
-### Installing a cityEHR Workstation
+### Installing an AHI Workstation
 
-Each cityEHR Workstation should be run in its own virtual machine. To install a cityEHR workstation run the following commands on a new VM:
+Each AHI Workstation should be run in its own virtual machine. To install an AHI workstation run the following commands on a new VM:
 
 ```shell
-git clone https://github.com/evolvedbinary/cityehr-workshop-vm-setup.git
-cd cityehr-workshop-vm-setup
+git clone https://github.com/evolvedbinary/fordham-ahi-vm-setup.git
+cd fordham-ahi-vm-setup
 sudo ./install-puppet-agent.sh
 
 cd workstation
@@ -183,12 +183,12 @@ We have to restart the system after the above as it may install a new Kernel and
 sudo shutdown -r now
 ```
 
-After the system restarts and you have logged in, you need to resume from the `cityehr-workshop-vm-setup/workstation` repo checkout:
+After the system restarts and you have logged in, you need to resume from the `fordham-ahi-vm-setup/workstation` repo checkout:
 
 ```shell
-cd cityehr-workshop-vm-setup/workstation
+cd fordham-ahi-vm-setup/workstation
 sudo FACTER_default_user_password=mypassword \
-     FACTER_mariadb_db_root_password=cityehrwork \
+     FACTER_mariadb_db_root_password=fordhamahi \
      /opt/puppetlabs/bin/puppet apply .
 ```
 
@@ -211,12 +211,12 @@ After installation you should be able to access this instance using either one o
 		* **Mac** - Install and run (Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12) from the Apple Store.
 		* **Linux** - run `rdesktop` (Ubuntu install: `apt-get install -y rdesktop && rdesktop`)
 	* Connection Settings:
-		* **Host**: The IP address or FQDN of the remote machine (e.g. `cityehrwork1.evolvedbinary.com`)
-		* **Username**: `ubuntu`
+		* **Host**: The IP address or FQDN of the remote machine (e.g. `fordham-ahi-01.evolvedbinary.com`)
+		* **Username**: The part of your Fordham University email address that appears before the `@` sign, e.g. If you email address is `adam.retter@fordham.edu`, then just use `adam.retter`.
 		* **Password**: *the password you set above for `default_user_password`*
 
 
-2. Indirectly via the Guacamole website by visiting the website (e.g. [https://plum.evolvedbinary.com](https://plum.evolvedbinary.com)) in your web browser.
+2. Indirectly via the Guacamole website by visiting the website (e.g. [https://fordham-ahi.evolvedbinary.com](https://fordham-ahi.evolvedbinary.com)) in your web browser.
 	* Login details:
-		* **Username**: `cityehrwork1` (replace 1 with the number of the instance)
-		* **Password**: *the password you set above for `cityehrwork_default_user_password`*
+		* **Username**: Your Fordham University email address, e.g. `adam.retter@fordham.edu`)
+		* **Password**: *the password you set above for `ahi_default_user_password`*

@@ -84,13 +84,13 @@ file { '/etc/guacamole/guacamole.properties':
 
 $user_mapping = @("USER_MAPPING_EOF":xml/L)
   <user-mapping>
-      <authorize username="cityehrwork1" password="cityehrwork">
-          <connection name="cityehrwork1">
+      <authorize username="fordham-ahi-01" password="fordham">
+          <connection name="fordham-ahi-01">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork1.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-01.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -101,13 +101,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork2" password="cityehrwork">
-          <connection name="cityehrwork2">
+      <authorize username="fordham-ahi-02" password="fordham">
+          <connection name="fordham-ahi-02">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork2.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-02.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -118,13 +118,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork3" password="cityehrwork">
-          <connection name="cityehrwork3">
+      <authorize username="fordham-ahi-03" password="fordham">
+          <connection name="fordham-ahi-03">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork3.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-03.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -135,13 +135,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork4" password="cityehrwork">
-          <connection name="cityehrwork4">
+      <authorize username="fordham-ahi-04" password="fordham">
+          <connection name="fordham-ahi-04">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork4.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-04.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -152,13 +152,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork5" password="cityehrwork">
-          <connection name="cityehrwork5">
+      <authorize username="fordham-ahi-05" password="fordham">
+          <connection name="fordham-ahi-05">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork5.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-05.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -169,13 +169,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork6" password="cityehrwork">
-          <connection name="cityehrwork6">
+      <authorize username="fordham-ahi-06" password="fordham">
+          <connection name="fordham-ahi-06">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork6.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-06.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -186,13 +186,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
         </authorize>
-        <authorize username="cityehrwork7" password="cityehrwork">
-          <connection name="cityehrwork7">
+        <authorize username="fordham-ahi-07" password="fordham">
+          <connection name="fordham-ahi-07">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork7.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-07.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -203,13 +203,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
         </authorize>
-        <authorize username="cityehrwork8" password="cityehrwork">
-          <connection name="cityehrwork8">
+        <authorize username="fordham-ahi-08" password="fordham">
+          <connection name="fordham-ahi-08">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork8.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-08.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -220,13 +220,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork9" password="cityehrwork">
-          <connection name="cityehrwork9">
+      <authorize username="fordham-ahi-09" password="fordham">
+          <connection name="fordham-ahi-09">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork9.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-09.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -237,13 +237,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="cityehrwork10" password="cityehrwork">
-          <connection name="cityehrwork10">
+      <authorize username="fordham-ahi-10" password="fordham">
+          <connection name="fordham-ahi-10">
               <protocol>rdp</protocol>
-              <param name="hostname">cityehrwork10.evolvedbinary.com</param>
+              <param name="hostname">fordham-ahi-10.evolvedbinary.com</param>
               <param name="port">3389</param>
               <param name="username">ubuntu</param>
-              <param name="password">${cityehrwork_default_user_password}</param>
+              <param name="password">${ahi_default_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>

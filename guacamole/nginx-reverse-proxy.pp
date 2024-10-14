@@ -4,7 +4,7 @@
 
 include ufw
 
-$fqn = 'plum.evolvedbinary.com'
+$fqn = 'fordham-ahi.evolvedbinary.com'
 
 class { 'nginx':
   package_ensure  => installed,
