@@ -4,6 +4,11 @@
 
 $guacamole_client_source_folder = "/home/${default_user}/code/guacamole-client"
 
+$default_custom_user = 'student'
+$custom_user = [$override_custom_user, $default_custom_user][0]
+$default_custom_user_password = 'student'
+$custom_user_password = [$override_custom_user_password, $default_custom_user_password][0]
+
 file { 'guacamole-client-source-folder':
   ensure  => directory,
   path    => $guacamole_client_source_folder,
@@ -84,13 +89,13 @@ file { '/etc/guacamole/guacamole.properties':
 
 $user_mapping = @("USER_MAPPING_EOF":xml/L)
   <user-mapping>
-      <authorize username="fordham-ahi-01" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-01">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-01.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -101,13 +106,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-02" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-02">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-02.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -118,13 +123,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-03" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-03">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-03.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -135,13 +140,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-04" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-04">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-04.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -152,13 +157,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-05" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-05">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-05.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -169,13 +174,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-06" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-06">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-06.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -186,13 +191,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
         </authorize>
-        <authorize username="fordham-ahi-07" password="fordham">
+        <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-07">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-07.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -203,13 +208,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
         </authorize>
-        <authorize username="fordham-ahi-08" password="fordham">
+        <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-08">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-08.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -220,13 +225,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-09" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-09">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-09.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>
@@ -237,13 +242,13 @@ $user_mapping = @("USER_MAPPING_EOF":xml/L)
               <param name="drive-path">/guacamole-drive</param>
           </connection>
       </authorize>
-      <authorize username="fordham-ahi-10" password="fordham">
+      <authorize username="${custom_user}@fordham.edu" password="${custom_user_password}">
           <connection name="fordham-ahi-10">
               <protocol>rdp</protocol>
               <param name="hostname">fordham-ahi-10.evolvedbinary.com</param>
               <param name="port">3389</param>
-              <param name="username">ubuntu</param>
-              <param name="password">${ahi_default_user_password}</param>
+              <param name="username">${custom_user}</param>
+              <param name="password">${custom_user_password}</param>
               <param name="enable-touch">false</param>
               <param name="resize-method">display-update</param>
               <param name="disable-audio">true</param>

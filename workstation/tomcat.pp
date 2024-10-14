@@ -11,7 +11,7 @@ group { $tomcat_user:
   ensure          => present,
   system          => true,
   auth_membership => false,
-  members         => [$default_user],
+  members         => [$default_user, $custom_user],
 }
 
 user { $tomcat_user:

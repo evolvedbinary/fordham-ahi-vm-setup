@@ -91,14 +91,16 @@ After the system restarts and you have logged in, you need to resume from the `f
 cd fordham-ahi-vm-setup/guacamole
 
 sudo FACTER_default_user_password=mypassword2 \
-     FACTER_ahi_default_user_password=mypassword
+     FACTER_override_custom_user=adam.retter \
+	 FACTER_override_custom_user_password=fordham \
      /opt/puppetlabs/bin/puppet apply .
 ```
 
 **NOTE:** you should set your own passwords appropriately above!
 
 * `default_user_password` this is the password to set for the default linux user on this machine (typically the user is named `ubuntu` on Ubuntu Cloud images).
-* `ahi_default_user_password` should be set to the password of the default user on the remote (AHI workstation) virtual machines that you are trying to access.
+* `override_custom_user` should be set to the username of the custom user on the remote (AHI workstation) virtual machines that you are trying to access. If not specified, defaults to: `student`.
+* `override_custom_user_password` should be set to the password of the custom user on the remote (AHI workstation) virtual machines that you are trying to access. If not specified, defaults to: `student`.
 
 After installation Guacamole's Web Server should be accessible from: [http://localhost:8080](http://localhost:8080), but should be accessible (via an nginx reverse proxy) from: [https://localhost](https://localhost)
 
@@ -175,6 +177,8 @@ cd workstation
 sudo /opt/puppetlabs/bin/puppet apply locale-gb.pp
 
 sudo FACTER_default_user_password=mypassword \
+	 FACTER_override_custom_user=adam.retter \
+	 FACTER_custom_user_password=fordham \
      /opt/puppetlabs/bin/puppet apply base.pp
 ```
 
@@ -193,13 +197,17 @@ After the system restarts and you have logged in, you need to resume from the `f
 ```shell
 cd fordham-ahi-vm-setup/workstation
 sudo FACTER_default_user_password=mypassword \
+	 FACTER_override_custom_user=adam.retter \
+	 FACTER_custom_user_password=fordham \
      FACTER_mariadb_db_root_password=fordhamahi \
      /opt/puppetlabs/bin/puppet apply .
 ```
 
 **NOTE:** you should set your own passwords appropriately above!
 
-* `default_user_password` this is the password to set for the default linux user (typically the user is named `ubuntu` on Ubuntu Cloud images). It needs to be the same as the password you used for this above.
+* `default_user_password` this is the password to set for the default linux user on this machine (typically the user is named `ubuntu` on Ubuntu Cloud images).
+* `override_custom_user` this is the username for the linux user account to add to this machine (e.g. for the Student). This should be the part of their Fordham University email address that appears before the `@` sign, e.g. If their email address is `adam.retter@fordham.edu`, then just use `adam.retter`. If not specified, defaults to: `student`.
+* `override_custom_user_password` this is a password for the custom user account. If not specified, defaults to: `student`.
 * `mariadb_db_root_password` - This is the password to set for the `root` user in MariaDB.
 
 We have to restart the system after the above as it installs a new desktop login manager.
@@ -217,11 +225,11 @@ After installation you should be able to access this instance using either one o
 		* **Linux** - run `rdesktop` (Ubuntu install: `apt-get install -y rdesktop && rdesktop`)
 	* Connection Settings:
 		* **Host**: The IP address or FQDN of the remote machine (e.g. `fordham-ahi-01.evolvedbinary.com`)
-		* **Username**: The part of your Fordham University email address that appears before the `@` sign, e.g. If you email address is `adam.retter@fordham.edu`, then just use `adam.retter`.
-		* **Password**: *the password you set above for `default_user_password`*
+		* **Username**: The part of your Fordham University email address that appears before the `@` sign, e.g. If you email address is `adam.retter@fordham.edu`, then just use `adam.retter`. This is the username you set above for `override_custom_user`.
+		* **Password**: *the password you set above for `override_custom_user_password`*
 
 
 2. Indirectly via the Guacamole website by visiting the website (e.g. [https://fordham-ahi.evolvedbinary.com](https://fordham-ahi.evolvedbinary.com)) in your web browser.
 	* Login details:
 		* **Username**: Your Fordham University email address, e.g. `adam.retter@fordham.edu`)
-		* **Password**: *the password you set above for `ahi_default_user_password`*
+		* **Password**: *the password you set above for `override_custom_user_password`*
