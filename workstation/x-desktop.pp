@@ -2,7 +2,7 @@
 # Puppet Script for a Desktop Developer Environment using LXQT on Ubuntu 24.04
 ###
 
-$desktop_background_image = "/home/${custom_user}/Pictures/cityehrwork-desktop-background.png"
+$desktop_background_image = "/home/${custom_user}/Pictures/fordham-ahi-desktop-background.png"
 
 file { 'disable-screensaver':
   ensure  => file,
@@ -73,7 +73,7 @@ file { "/home/${custom_user}/Pictures":
 }
 
 exec { 'download-desktop-background':
-  command => "curl https://static.evolvedbinary.com/cityehr/cityehrwork-desktop-background.png -o ${desktop_background_image}",
+  command => "curl https://static.evolvedbinary.com/fordham-ahi/fordham-ahi-desktop-background.png -o ${desktop_background_image}",
   path    => '/usr/bin',
   user    => $custom_user,
   creates => $desktop_background_image,
