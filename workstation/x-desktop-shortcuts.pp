@@ -73,8 +73,8 @@ file { 'eb-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-eb-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/evolved-binary.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/evolved-binary.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/evolved-binary.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/evolved-binary.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -132,8 +132,8 @@ file { 'ohi-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-ohi-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/open-health-informatics.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/open-health-informatics.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/open-health-informatics.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/open-health-informatics.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',

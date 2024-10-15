@@ -168,8 +168,8 @@ file { 'computer-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-computer-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/computer.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/computer.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/computer.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/computer.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -199,8 +199,8 @@ file { 'user-home-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-user-home-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/user-home.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/user-home.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/user-home.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/user-home.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -230,8 +230,8 @@ file { 'network-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-network-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/network.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/network.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/network.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/network.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -261,8 +261,8 @@ file { 'trash-can-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-trash-can-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/trash-can.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/trash-can.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/trash-can.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/trash-can.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -302,8 +302,8 @@ file { 'qterminal-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-qterminal-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/qterminal.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/qterminal.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/qterminal.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/qterminal.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -334,8 +334,8 @@ file { 'pcmanfm-qt-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-pcmanfm-qt-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/pcmanfm-qt.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/pcmanfm-qt.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/pcmanfm-qt.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/pcmanfm-qt.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -366,8 +366,8 @@ file { 'lxqt-archiver-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-lxqt-archiver-desktop-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/lxqt-archiver.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/lxqt-archiver.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/lxqt-archiver.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/lxqt-archiver.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',

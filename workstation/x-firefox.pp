@@ -33,8 +33,8 @@ file { 'firefox-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-firefox-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/firefox.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/firefox.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/firefox.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/firefox.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',

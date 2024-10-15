@@ -22,8 +22,8 @@ file { 'libreoffice-writer-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-libreoffice-writer-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/libreoffice-writer.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/libreoffice-writer.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/libreoffice-writer.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/libreoffice-writer.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
@@ -46,8 +46,8 @@ file { 'libreoffice-calc-desktop-shortcut':
 }
 
 exec { 'gvfs-trust-libreoffice-calc-shortcut':
-  command     => "/usr/bin/gio set /home/${custom_user}/Desktop/libreoffice-calc.desktop metadata::trusted true",
-  unless      => "/usr/bin/gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/libreoffice-calc.desktop | /usr/bin/grep trusted",
+  command     => "/usr/bin/dbus-launch gio set /home/${custom_user}/Desktop/libreoffice-calc.desktop metadata::trusted true",
+  unless      => "/usr/bin/dbus-launch gio info --attributes=metadata::trusted /home/${custom_user}/Desktop/libreoffice-calc.desktop | /usr/bin/grep trusted",
   user        => $custom_user,
   environment => [
     'DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus',
