@@ -179,7 +179,7 @@ cd workstation
 sudo /opt/puppetlabs/bin/puppet apply locale-us.pp
 
 sudo FACTER_default_user_password=mypassword \
-     /opt/puppetlabs/bin/puppet apply base.pp
+     /opt/puppetlabs/bin/puppet apply 01-base.pp
 ```
 
 **NOTE:** you should set your own passwords appropriately above!
