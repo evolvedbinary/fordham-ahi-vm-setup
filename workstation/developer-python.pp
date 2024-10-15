@@ -11,7 +11,7 @@ package { 'python3-pip':
   require => Package['python3'],
 }
 
-exec { 'download-mininconda3':
+exec { 'download-miniconda3':
   command => '/usr/bin/curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/Miniconda3-latest-Linux-x86_64.sh',
   unless  => '/usr/bin/test -d /opt/miniconda',
   require => Package['curl'],
