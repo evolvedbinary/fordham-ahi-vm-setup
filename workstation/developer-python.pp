@@ -16,12 +16,8 @@ exec { 'download-miniconda3':
   user    => 'root',
   unless  => '/usr/bin/test -d /opt/miniconda',
   require => Package['curl'],
-}
-
-file { '/tmp/Miniconda3-latest-Linux-x86_64.sh':
+} ~> file { '/tmp/Miniconda3-latest-Linux-x86_64.sh':
   mode    => '0755',
-  unless  => '/usr/bin/test -d /opt/miniconda',
-  require => Exec['download-miniconda3'],
 }
 
 exec { 'install-miniconda3':
