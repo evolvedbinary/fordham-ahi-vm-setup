@@ -26,20 +26,22 @@ cd ~/hetzner
 
 sudo uvt-simplestreams-libvirt sync --source=http://cloud-images.ubuntu.com/minimal/releases arch=amd64 release=noble
 
-./create-uvt-kvm.sh --hostname fordham-ahi-01 --release noble --memory 8192 --disk 30 --cpu 4 --bridge virbr0 --ip 192.168.122.201 --ip6 2a01:4f8:140:91f0::201 --gateway 192.168.122.1 --gateway6 2a01:4f8:140:91f0::2 --dns 185.12.64.1 --dns 185.12.64.2 --dns-search evolvedbinary.com --private-bridge virbr2 --private-ip 10.0.55.201 --private-gateway 10.0.55.254 --autostart
+./create-uvt-kvm.sh --hostname fordham-ahi-01 --release noble --memory 8192 --disk 30 --cpu-model host-passthrough --cpu 4 --bridge virbr1 --ip6 2a01:4f8:140:91f0::201 --gateway6 2a01:4f8:140:91f0::2 --dns 2a01:4ff:ff00::add:1 --dns 2a01:4ff:ff00::add:2 --dns-search evolvedbinary.com --private-1-bridge virbr0 --private-1-ip 192.168.122.201 --private-1-next-network 0.0.0.0/0 --private-1-gateway 192.168.122.1 --private-1-dns 185.12.64.1 --private-1-dns 185.12.64.2 --private-1-dns-search evolvedbinary.com --private-2-bridge virbr2 --private-2-ip 10.0.55.201 --private-2-next-network 10.0.1.254/32 --private-2-gateway 10.0.55.254 --auto-start
 ```
 
 **NOTE**: The VM specific settings are:
 * `--hostname` `fordham-ahi-01`
-* `--ip` `192.168.122.201` (IANA Private)
 * `--ip6` `2a01:4f8:140:91f0::201`
+* `--private-1-ip` `192.168.122.201` (IANA Private)
 
 **NOTE**: The network settings specific to the host are:
-* `--bridge` `virbr0`
-* `--gateway` `192.168.122.1` (IANA Private)
+* `--bridge` `virbr1`
 * `--gateway6` `2a01:4f8:140:91f0::2`
+* `--private-1-bridge` `virbr0`
+* `--gateway` `192.168.122.1` (IANA Private)
 
 **NOTE**: The network settings specific to the hosting provider are:
+* `--dns 2a01:4ff:ff00::add:1`, `--dns 2a01:4ff:ff00::add:2`
 * `--dns 185.12.64.1`, `--dns 185.12.64.2`
 
 
