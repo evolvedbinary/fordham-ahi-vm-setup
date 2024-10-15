@@ -37,10 +37,11 @@ exec { 'download-cityehr-quickstart-guide':
 # Set homepage for cityEHR
 
 file { "/home/${custom_user}/snap":
-  ensure => directory,
-  owner  => $custom_user,
-  group  => $custom_user,
-  mode   => '0700',
+  ensure  => directory,
+  owner   => $custom_user,
+  group   => $custom_user,
+  mode    => '0700',
+  require => File['custom_user_home'],
 }
 
 file { "/home/${custom_user}/snap/firefox":
