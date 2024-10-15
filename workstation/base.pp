@@ -102,7 +102,7 @@ ssh_authorized_key { 'ahi':
   ensure  => present,
   user    => $default_user,
   type    => 'ssh-ed25519',
-  key     => 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWpiT3R5AgDYDAm5GhPpvf8+vh3VrI9LcPdav+HsoYc Applied Health Informatics',
+  key     => 'AAAAC3NzaC1lZDI1NTE5AAAAIGWpiT3R5AgDYDAm5GhPpvf8+vh3VrI9LcPdav+HsoYc',
   require => User['default_user'],
 }
 
