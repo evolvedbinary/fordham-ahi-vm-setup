@@ -176,7 +176,7 @@ sudo ./install-puppet-agent.sh
 
 cd workstation
 
-sudo /opt/puppetlabs/bin/puppet apply locale-gb.pp
+sudo /opt/puppetlabs/bin/puppet apply locale-us.pp
 
 sudo FACTER_default_user_password=mypassword \
 	 FACTER_override_custom_user=adam.retter \
