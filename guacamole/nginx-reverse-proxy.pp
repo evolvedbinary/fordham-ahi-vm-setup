@@ -27,6 +27,7 @@ nginx::resource::upstream { 'guacamole-server':
   },
 }
 
+# NOTE: SSL config is done further down
 nginx::resource::server { $fqdn:
   ensure              => present,
   access_log          => "/var/log/nginx/${fqdn}_access.log",
@@ -34,12 +35,12 @@ nginx::resource::server { $fqdn:
   ipv6_enable         => true,
   ipv6_listen_options => '',
   ipv6_listen_port    => 80,
-  ssl                 => true,
-  ssl_redirect        => true,
-  ssl_cert            => "/etc/letsencrypt/live/${fqdn}/cert.pem",
-  ssl_key             => "/etc/letsencrypt/live/${fqdn}/privkey.pem",
-  ssl_dhparam         => '/etc/letsencrypt/ssl-dhparams.pem',
-  http2               => 'on',
+  # ssl                 => true,
+  # ssl_redirect        => true,
+  # ssl_cert            => "/etc/letsencrypt/live/${fqdn}/cert.pem",
+  # ssl_key             => "/etc/letsencrypt/live/${fqdn}/privkey.pem",
+  # ssl_dhparam         => '/etc/letsencrypt/ssl-dhparams.pem',
+  # http2               => 'on',
   proxy               => 'http://guacamole-server/guacamole/',
   proxy_http_version  => '1.1',
   proxy_set_header    => [
@@ -80,6 +81,34 @@ class { 'letsencrypt':
     Class['letsencrypt::plugin::nginx'],
     Package['cron']
   ],
+}
+
+# reconfigure nginx but now with SSL
+nginx::resource::server { "${fqdn}_ssl":
+  ensure              => present,
+  server_name         => [$fqdn],
+  access_log          => "/var/log/nginx/${fqdn}_access.log",
+  listen_port         => 80,
+  ipv6_enable         => true,
+  ipv6_listen_options => '',
+  ipv6_listen_port    => 80,
+  ssl                 => true,
+  ssl_redirect        => true,
+  ssl_cert            => "/etc/letsencrypt/live/${fqdn}/cert.pem",
+  ssl_key             => "/etc/letsencrypt/live/${fqdn}/privkey.pem",
+  ssl_dhparam         => '/etc/letsencrypt/ssl-dhparams.pem',
+  http2               => 'on',
+  proxy               => 'http://guacamole-server/guacamole/',
+  proxy_http_version  => '1.1',
+  proxy_set_header    => [
+    'Host $host',
+    'Upgrade $http_upgrade',
+    'Connection $connection_upgrade',
+    'X-Real-IP $remote_addr',
+    'X-Forwarded-For $proxy_add_x_forwarded_for',
+    'nginx-request-uri $request_uri',
+  ],
+  require             => Class['letsencrypt'],
 }
 
 class { 'letsencrypt::plugin::nginx':
