@@ -356,15 +356,9 @@ file { '/etc/guacamole/user-mapping.xml':
   require => File['/etc/guacamole'],
 }
 
-$tomcat_packages = ['tomcat9', 'tomcat9-admin', 'tomcat9-user']
-package { $tomcat_packages:
-  ensure  => installed,
-  require => Package['openjdk-17-jdk-headless'],
-}
-
 file { 'guacamole-war':
   ensure  => file,
-  path    => '/var/lib/tomcat9/webapps/guacamole.war',
+  path    => '/opt/tomcat/webapps/guacamole.war',
   source  => "${guacamole_client_source_folder}/guacamole/target/guacamole-1.6.0.war",
   require => [
     File['/etc/guacamole/guacamole.properties'],
@@ -372,15 +366,6 @@ file { 'guacamole-war':
     File['/etc/guacamole/lib'],
     File['/etc/guacamole/extensions'],
     Exec['guacamole-client-compile'],
-    Package['tomcat9'],
-  ],
-}
-
-service { 'tomcat9':
-  ensure  => running,
-  enable  => true,
-  require => [
-    File['guacamole-war'],
-    Package['tomcat9'],
+    Service['tomcat'],
   ],
 }
