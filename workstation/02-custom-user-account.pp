@@ -60,15 +60,24 @@ file { 'custom_user_code_folder':
   ],
 }
 
-exec { 'install-ohmyzsh-custom-user':
-  command => 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
-  path    => '/usr/bin',
+exec { 'download-ohmyzsh':
+  command => '/usr/bin/curl -L https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o /tmp/ohmyzsh-install.sh',
   user    => $custom_user,
+  unless  => "/usr/bin/test -d /home/${custom_user}/.oh-my-zsh",
   require => [
     Package['curl'],
     Package['zsh'],
     Package['git'],
     User['custom_user']
   ],
-  creates => "/home/${custom_user}/.oh-my-zsh",
+} ~> file { '/tmp/ohmyzsh-install.sh':
+  mode    => '0755',
+}
+
+exec { 'install-ohmyzsh-custom-user':
+  command  => '/tmp/ohmyzsh-install.sh',
+  user     => $custom_user,
+  provider => 'shell',
+  unless   => "/usr/bin/test -d /home/${custom_user}/.oh-my-zsh",
+  require  => File['/tmp/ohmyzsh-install.sh'],
 }
