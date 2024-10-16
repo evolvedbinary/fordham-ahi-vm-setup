@@ -25,7 +25,20 @@ git clone --single-branch --branch hetzner https://github.com/adamretter/soyoust
 cd ~/hetzner
 
 sudo uvt-simplestreams-libvirt sync --source=http://cloud-images.ubuntu.com/minimal/releases arch=amd64 release=noble
+```
 
+As IPv4 addresses are becoming less available and therefore more expensive, you can setup either:
+
+	1. A VM with a Public IPv6 Address and Private IPv4
+		This can be directly accessible over IPv6 and on the Internet.
+		If you wish to access it via IPv4 over the Internet you will need to setup some sort of NAT and/or Port Forwarding from another machine that has a Public IPv4 address, see: [Optional - IPv4 Port Forwarding](#optional---ipv4-port-forwarding).
+
+	2. A VM with a Public IPv6 Address and Public IPv4
+		This can be directly accessible over IPv6 and IPv4 on the Internet.
+
+#### Option 1 - VM with Public IPv6 and Private IPv4
+
+```shell
 ./create-uvt-kvm.sh --hostname fordham-ahi-01 --release noble --memory 8192 --disk 30 --cpu-model host-passthrough --cpu 4 --bridge virbr1 --ip6 2a01:4f8:140:91f0::201 --gateway6 2a01:4f8:140:91f0::2 --dns 2a01:4ff:ff00::add:1 --dns 2a01:4ff:ff00::add:2 --dns-search evolvedbinary.com --private-1-bridge virbr0 --private-1-ip 192.168.122.201 --private-1-next-network 0.0.0.0/0 --private-1-gateway 192.168.122.1 --private-1-dns 185.12.64.1 --private-1-dns 185.12.64.2 --private-1-dns-search evolvedbinary.com --private-2-bridge virbr2 --private-2-ip 10.0.55.201 --private-2-next-network 10.0.1.254/32 --private-2-gateway 10.0.55.254 --auto-start
 ```
 
@@ -39,6 +52,29 @@ sudo uvt-simplestreams-libvirt sync --source=http://cloud-images.ubuntu.com/mini
 * `--gateway6` `2a01:4f8:140:91f0::2`
 * `--private-1-bridge` `virbr0`
 * `--gateway` `192.168.122.1` (IANA Private)
+
+**NOTE**: The network settings specific to the hosting provider are:
+* `--dns 2a01:4ff:ff00::add:1`, `--dns 2a01:4ff:ff00::add:2`
+* `--dns 185.12.64.1`, `--dns 185.12.64.2`
+
+See also: [Optional - IPv4 Port Forwarding](#optional---ipv4-port-forwarding).
+
+#### Option 2 - VM with Public IPv6 and Public IPv4
+
+```shell
+./create-uvt-kvm.sh --hostname fordham-ahi --release noble --memory 8192 --disk 30 --cpu-model host-passthrough --cpu 4 --bridge virbr1 --ip 188.40.179.160 --ip6 2a01:4f8:140:91f0::160 --gateway 46.4.100.114 --gateway6 2a01:4f8:140:91f0::2 --dns 2a01:4ff:ff00::add:1 --dns 2a01:4ff:ff00::add:2 --dns 185.12.64.1 --dns 185.12.64.2 --dns-search evolvedbinary.com  --private-1-bridge virbr0 --private-1-ip 192.168.122.160 --private-2-bridge virbr2 --private-2-ip 10.0.55.201 --private-2-next-network 10.0.1.254/32 --private-2-gateway 10.0.55.254 --auto-start
+```
+
+**NOTE**: The VM specific settings are:
+* `--hostname` `fordham-ahi`
+* `--ip6` `2a01:4f8:140:91f0::160`
+* `--ip` `188.40.179.160`
+* `--private-1-ip` `192.168.122.160` (IANA Private)
+
+**NOTE**: The network settings specific to the host are:
+* `--bridge` `virbr1`
+* `--gateway6` `2a01:4f8:140:91f0::2`
+* `--gateway` `46.4.100.114`
 
 **NOTE**: The network settings specific to the hosting provider are:
 * `--dns 2a01:4ff:ff00::add:1`, `--dns 2a01:4ff:ff00::add:2`
@@ -233,3 +269,48 @@ After installation you should be able to access this instance using either one o
 	* Login details:
 		* **Username**: Your Fordham University email address, e.g. `adam.retter@fordham.edu`)
 		* **Password**: *the password you set above for `override_custom_user_password`*
+
+
+### Optional - IPv4 Port Forwarding
+
+If you are using Private IPv4 addresses for the Virtual Machines, and you want to connect to them using RDP over IPv4, you will need to port-forward from a Public IPv4 address (perhaps that used on the Guacamole Server) to each VM.
+
+On the host with the Public IPv4 address, edit the the file `/etc/sysctl.conf`, and enable the following:
+```
+net/ipv4/ip_forward=1
+net/ipv6/conf/default/forwarding=1
+net/ipv6/conf/all/forwarding=1
+```
+then run `sudo sysctl -p && sudo sysctl --system`.
+
+On the host with the Public IPv4 address, add the following to the endo fo the file `/etc/ufw/before.rules`:
+
+```
+# NAT
+*nat :PREROUTING ACCEPT [0:0]
+# Port Forward RDP to Fordham AHI VMs
+-A PREROUTING -p tcp -i enp1s0 --dport 3390 -j DNAT --to-destination 192.168.122.201:3389
+COMMIT
+```
+
+Add the following to the end of the file `/etc/ufw/before6.rules`:
+```
+# NAT
+*nat :PREROUTING ACCEPT [0:0]
+# Port Forward RDP to Fordham AHI VMs
+-A PREROUTING -p tcp -i enp1s0 --dport 3390 -j DNAT --to-destination 2a01:4f8:140:91f0::201:3389
+COMMIT
+```
+
+The above two changes:
+1. Forward TCP port `3390` on the host with the Public IPv4 address to TCP Port `3389` (i.e. RDP) on the host `192.168.122.201`.
+2. Forward TCP port `3390` on the host with the Public IPv6 address to TCP Port `3389` (i.e. RDP) on the host `2a01:4f8:140:91f0::201`.
+You can add as many rules as you have Virtual Machines.
+
+Then run: 
+
+sudo ufw route allow in on enp1s0 out on enp7s0
+sudo ufw route allow in on enp7s0 out on enp1s0
+
+1. `sudo ufw allow in on enp1s0 proto tcp to any port 3390 comment "For Port Forward to 3389 on fordham-ahi-01"`
+2. `sudo systemctl restart ufw`
