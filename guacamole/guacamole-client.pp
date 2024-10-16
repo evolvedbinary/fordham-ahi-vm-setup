@@ -23,7 +23,7 @@ vcsrepo { 'guacamole-client-source':
   path               => $guacamole_client_source_folder,
   provider           => git,
   source             => 'https://github.com/apache/guacamole-client.git',
-  revision           => 'master',
+  revision           => 'main',
   keep_local_changes => false,  # TODO(AR) change this to 'true' once https://github.com/puppetlabs/puppetlabs-vcsrepo/pull/623 is merged and released
   owner              => $default_user,
   group              => $default_user,
@@ -365,7 +365,7 @@ package { $tomcat_packages:
 file { 'guacamole-war':
   ensure  => file,
   path    => '/var/lib/tomcat9/webapps/guacamole.war',
-  source  => "${guacamole_client_source_folder}/guacamole/target/guacamole-1.5.5.war",
+  source  => "${guacamole_client_source_folder}/guacamole/target/guacamole-1.6.0.war",
   require => [
     File['/etc/guacamole/guacamole.properties'],
     File['/etc/guacamole/user-mapping.xml'],
