@@ -89,6 +89,7 @@ $tomcat_service_unit = @("TOMCAT_SERVICE_UNIT_EOF"/L)
   Type=forking
   User=${tomcat_user}
   Group=${tomcat_user}
+  UMask=002
   Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
   Environment="_JAVA_OPTIONS="
   Environment="CATALINA_HOME=${tomcat_alias}"
