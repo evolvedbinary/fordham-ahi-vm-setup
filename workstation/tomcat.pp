@@ -61,6 +61,18 @@ exec { 'install-tomcat':
   path    => '/usr/bin',
 }
 
+file { 'set-webapps-mode':
+  ensure  => directory,
+  path    => "${tomcat_path}/webapps",
+  owner   => $tomcat_user,
+  group   => $tomcat_user,
+  # Allow members of the group 'tomcat' to write to the folder
+  # sets the sticky bit so that they can't delete or rename existing files
+  # sets the setgid flag so that group ownership is inherited on new files/directories
+  mode    => '3770',
+  require => Exec['install-tomcat'],
+}
+
 file { '/var/run/tomcat':
   ensure => directory,
   owner  => $tomcat_user,
