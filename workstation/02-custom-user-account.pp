@@ -81,3 +81,17 @@ exec { 'install-ohmyzsh-custom-user':
   unless   => "/usr/bin/test -d /home/${custom_user}/.oh-my-zsh",
   require  => File['/tmp/ohmyzsh-install.sh'],
 }
+
+$custom_user_sudoer = @("CUSTOM_USER_SUDOER_EOF"/L)
+${custom_user} ALL=(ALL) NOPASSWD: /usr/bin/apt install *, /usr/bin/apt-get install *
+  | CUSTOM_USER_SUDOER_EOF
+
+file { 'custom-user-sudoer':
+  ensure  => file,
+  path    => '/etc/sudoers.d/custom-user-sudoer',
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0440',
+  content => $custom_user_sudoer,
+  require => Group[$custom_user],
+}
