@@ -10,8 +10,12 @@ $tomcat_alias = '/opt/tomcat'
 group { $tomcat_user:
   ensure          => present,
   system          => true,
-  auth_membership => false,
+  auth_membership => true,
   members         => [$default_user, $custom_user],
+  require         => [
+    Group['default_user'],
+    Group['custom_user']
+  ],
 }
 
 user { $tomcat_user:
