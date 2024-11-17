@@ -102,8 +102,9 @@ $tomcat_service_unit = @("TOMCAT_SERVICE_UNIT_EOF"/L)
   WantedBy=multi-user.target
   | TOMCAT_SERVICE_UNIT_EOF
 
-file { '/etc/systemd/system/tomcat.service':
+file { 'tomcat.service':
   ensure  => file,
+  path    => '/etc/systemd/system/tomcat.service',
   content => $tomcat_service_unit,
   require => [
     User[$tomcat_user],
@@ -124,5 +125,22 @@ service { 'tomcat':
     File['/etc/systemd/system/tomcat.service'],
     Exec['systemd-reload-tomcat'],
     Package['openjdk-11-jdk'],
+  ],
+}
+
+$tomcat_service_sudoer = @("TOMCAT_SERVICE_SUDOER_EOF"/L)
+%${tomcat_user} ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop tomcat, /usr/bin/systemctl start tomcat, /usr/sbin/service tomcat stop, /usr/sbin/service tomcat start
+  | TOMCAT_SERVICE_SUDOER_EOF
+
+file { 'tomcat-service-sudoer':
+  ensure  => file,
+  path    => '/etc/sudoers.d/tomcat-service-sudoer',
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0440',
+  content => $tomcat_service_sudoer,
+  require => [
+    Group[$tomcat_user],
+    File['tomcat.service']
   ],
 }
