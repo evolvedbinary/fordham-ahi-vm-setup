@@ -138,7 +138,7 @@ ini_setting { 'desktop_background_color':
   path    => "/home/${custom_user}/.config/pcmanfm-qt/lxqt/settings.conf",
   section => 'Desktop',
   setting => 'BgColor',
-  value   => '#f8e5bd',
+  value   => '#ffffff',
   require => [
     Package['desktop'],
     File['settings.conf'],
