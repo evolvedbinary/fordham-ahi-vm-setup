@@ -4,9 +4,9 @@
 
 # Set the language
 exec { 'generate-us-language':
-	command => '/usr/sbin/locale-gen en_US.utf8',
-	user    => 'root',
-	unless  => '/usr/bin/localectl list-locales | /usr/bin/grep en_US.utf8',
+  command => '/usr/sbin/locale-gen en_US.utf8',
+  user    => 'root',
+  unless  => '/usr/bin/localectl list-locales | /usr/bin/grep en_US.utf8',
 }
 
 exec { 'set-language':
