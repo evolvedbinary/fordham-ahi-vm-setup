@@ -112,7 +112,7 @@ sudo ./install-puppet-agent.sh
 cd guacamole
 
 sudo FACTER_default_user_password=mypassword2 \
-     /opt/puppetlabs/bin/puppet apply base.pp
+     /opt/puppetlabs/bin/puppet apply 01-base.pp
 ```
 
 **NOTE:** you should set your own passwords appropriately above! The `default_user_password` is used for the Linux user that can access the machine, the username is `ubuntu`.
@@ -212,7 +212,7 @@ sudo ./install-puppet-agent.sh
 
 cd workstation
 
-sudo /opt/puppetlabs/bin/puppet apply locale-us.pp
+sudo /opt/puppetlabs/bin/puppet apply 00-locale.pp
 
 sudo FACTER_default_user_password=mypassword \
      /opt/puppetlabs/bin/puppet apply 01-base.pp
