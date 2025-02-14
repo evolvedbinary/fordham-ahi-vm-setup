@@ -4,6 +4,38 @@
 
 $oxygen_version = '26.0'
 
+$oxygen_license_xml = @(OXYGEN_LICENSE_XML_EOF:xml/L)
+  <?xml version="1.0" encoding="UTF-8"?>
+  <serialized xml:space="preserve">
+    <serializableOrderedMap>
+      <entry>
+        <String>license.26</String>
+        <String>------START-LICENSE-KEY------
+
+Registration_Name=Fordham University
+
+Company=
+
+Category=Academic-Classroom
+
+Component=XML-Editor, XSLT-Debugger, Saxon-SA
+
+Version=24
+
+Number_of_Licenses=1
+
+Date=03-19-2022
+
+Maintenance=365
+
+SGN=MCwCFBk0MU7M2SCGD5KDC/S+2wmq4AXRAhRDZYiO4f1qeGKzpSKbMl7lfFbgoA\=\=
+
+-------END-LICENSE-KEY-------</String>
+      </entry>
+    </serializableOrderedMap>
+  </serialized>
+  | OXYGEN_LICENSE_XML_EOF
+
 file { "/opt/oxygen-${oxygen_version}":
   ensure  => directory,
   replace => false,
@@ -88,38 +120,6 @@ file { 'oxygen-user-settings-path':
   group   => $custom_user,
   mode    => '0775',
 }
-
-$oxygen_license_xml = @(OXYGEN_LICENSE_XML_EOF:xml/L)
-  <?xml version="1.0" encoding="UTF-8"?>
-  <serialized xml:space="preserve">
-    <serializableOrderedMap>
-      <entry>
-        <String>license.26</String>
-        <String>------START-LICENSE-KEY------
-
-Registration_Name=Fordham University
-
-Company=
-
-Category=Academic-Classroom
-
-Component=XML-Editor, XSLT-Debugger, Saxon-SA
-
-Version=24
-
-Number_of_Licenses=1
-
-Date=03-19-2022
-
-Maintenance=365
-
-SGN=MCwCFBk0MU7M2SCGD5KDC/S+2wmq4AXRAhRDZYiO4f1qeGKzpSKbMl7lfFbgoA\=\=
-
--------END-LICENSE-KEY-------</String>
-      </entry>
-    </serializableOrderedMap>
-  </serialized>
-  | OXYGEN_LICENSE_XML_EOF
 
 file { 'oxygen-license':
   ensure  => file,
