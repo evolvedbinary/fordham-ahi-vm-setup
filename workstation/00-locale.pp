@@ -2,18 +2,22 @@
 # Puppet Script for setting locale on Ubuntu 24.04
 ###
 
+$locale = 'en_US'
+$xkbd_layout = 'us'
+$time_zone = 'America/New_York'
+
 # Set the language
-exec { 'generate-us-language':
-  command => '/usr/sbin/locale-gen en_US.utf8',
+exec { 'generate-language':
+  command => "/usr/sbin/locale-gen ${locale}.utf8",
   user    => 'root',
-  unless  => '/usr/bin/localectl list-locales | /usr/bin/grep en_US.utf8',
+  unless  => "/usr/bin/localectl list-locales | /usr/bin/grep ${locale}.utf8",
 }
 
 exec { 'set-language':
-  command => '/usr/sbin/update-locale LANG=en_US.utf8',
+  command => "/usr/sbin/update-locale LANG=${locale}.utf8",
   user    => 'root',
-  unless  => '/usr/bin/locale | /usr/bin/grep LANG=en_US.utf8',
-  require => Exec['generate-us-language'],
+  unless  => "/usr/bin/locale | /usr/bin/grep LANG=${locale}.utf8",
+  require => Exec['generate-language'],
 }
 
 file { '/etc/default/keyboard':
@@ -28,14 +32,14 @@ file { '/etc/default/keyboard':
 file_line { 'keyboard-layout':
   ensure => present,
   path   => '/etc/default/keyboard',
-  line   => 'XKBLAYOUT="us"',
+  line   => "XKBLAYOUT=\"${xkbd_layout}\"",
   match  => '^XKBLAYOUT\=',
 }
 
 # Set the time zone
 exec { 'set-timezone':
-  command => 'timedatectl set-timezone America/New_York',
+  command => "timedatectl set-timezone ${time_zone}",
   path    => '/usr/bin',
   user    => 'root',
-  unless  => 'cat /etc/timezone | grep America/New_York',
+  unless  => "cat /etc/timezone | grep ${time_zone}",
 }
