@@ -42,6 +42,18 @@ As IPv4 addresses are becoming less available and therefore more expensive, you 
 ./create-uvt-kvm.sh --hostname fordham-ahi-01 --release noble --memory 8192 --disk 30 --cpu-model host-passthrough --cpu 4 --bridge virbr1 --ip6 2a01:4f8:140:91f0::201 --gateway6 2a01:4f8:140:91f0::2 --dns 2a01:4ff:ff00::add:1 --dns 2a01:4ff:ff00::add:2 --dns-search evolvedbinary.com --private-1-bridge virbr0 --private-1-ip 192.168.122.201 --private-1-next-network 0.0.0.0/0 --private-1-gateway 192.168.122.1 --private-1-dns 185.12.64.1 --private-1-dns 185.12.64.2 --private-1-dns-search evolvedbinary.com --private-2-bridge virbr2 --private-2-ip 10.0.55.201 --private-2-next-network 10.0.1.254/32 --private-2-gateway 10.0.55.254 --auto-start
 ```
 
+**NOTE**: There is an issue at the moment with the 2nd private interface not being activated until the VM is shutdown and re-launched. So before you login to the VM fo rthe first time, please wait a few minutes so the VM finishes starting up, and then run:
+
+```shell
+virsh shutdown fordham-ahi-01
+```
+
+You should then check the status of the VM until it is shutdown. You can do that by running: `virsh domstate cityehr-work-01`. When the state is `shut off`, you can then restart the VM by running:
+
+```shell
+virsh fordham-ahi-01
+```
+
 **NOTE**: The VM specific settings are:
 * `--hostname` `fordham-ahi-01`
 * `--ip6` `2a01:4f8:140:91f0::201`
@@ -63,6 +75,18 @@ See also: [Optional - IPv4 Port Forwarding](#optional---ipv4-port-forwarding).
 
 ```shell
 ./create-uvt-kvm.sh --hostname fordham-ahi --release noble --memory 8192 --disk 30 --cpu-model host-passthrough --cpu 4 --bridge virbr1 --ip 188.40.179.160 --ip6 2a01:4f8:140:91f0::160 --gateway 46.4.100.114 --gateway6 2a01:4f8:140:91f0::2 --dns 2a01:4ff:ff00::add:1 --dns 2a01:4ff:ff00::add:2 --dns 185.12.64.1 --dns 185.12.64.2 --dns-search evolvedbinary.com  --private-1-bridge virbr0 --private-1-ip 192.168.122.160 --private-2-bridge virbr2 --private-2-ip 10.0.55.201 --private-2-next-network 10.0.1.254/32 --private-2-gateway 10.0.55.254 --auto-start
+```
+
+**NOTE**: There is an issue at the moment with the 2nd private interface not being activated until the VM is shutdown and re-launched. So before you login to the VM fo rthe first time, please wait a few minutes so the VM finishes starting up, and then run:
+
+```shell
+virsh shutdown fordham-ahi
+```
+
+You should then check the status of the VM until it is shutdown. You can do that by running: `virsh domstate cityehr-work-01`. When the state is `shut off`, you can then restart the VM by running:
+
+```shell
+virsh fordham-ahi
 ```
 
 **NOTE**: The VM specific settings are:
