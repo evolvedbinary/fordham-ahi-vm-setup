@@ -257,10 +257,10 @@ After the system restarts and you have logged in, you need to resume from the `f
 ```shell
 cd fordham-ahi-vm-setup/workstation
 sudo FACTER_default_user_password=mypassword \
-	 FACTER_override_custom_user=adam.retter \
-	 FACTER_override_custom_user_password=fordham \
-     FACTER_mariadb_db_root_password=fordhamahi \
-     /opt/puppetlabs/bin/puppet apply .
+  FACTER_override_custom_user=adam.retter \
+  FACTER_override_custom_user_password=fordham \
+  FACTER_mariadb_db_root_password=fordhamahi \
+  /opt/puppetlabs/bin/puppet apply .
 ```
 
 **NOTE:** you should set your own passwords appropriately above!

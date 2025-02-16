@@ -15,7 +15,6 @@ $default_user_ssh_access_key = {
   key  => 'AAAAC3NzaC1lZDI1NTE5AAAAIGWpiT3R5AgDYDAm5GhPpvf8+vh3VrI9LcPdav+HsoYc',
 }
 
-
 # setup automatic security updates
 package { 'unattended-upgrades':
   ensure => installed,
