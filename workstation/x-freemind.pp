@@ -52,7 +52,7 @@ $freemind_desktop_shortcut = @("FREEMIND_DESKTOP_ENTRY_EOF"/L)
   Version=1.0
   Type=Application
   Name=FreeMind
-  Exec=${freemind_bin}
+  Exec=env JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 ${freemind_bin}
   Terminal=false
   StartupNotify=false
   GenericName=FreeMind
@@ -68,7 +68,8 @@ file { 'freemind-shortcut':
   require => [
     Package['desktop'],
     File['custom_user_desktop_folder'],
-    File['/opt/freemind']
+    File['/opt/freemind'],
+    Package['openjdk-11-jre']
   ],
 }
 
